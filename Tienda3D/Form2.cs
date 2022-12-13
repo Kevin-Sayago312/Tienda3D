@@ -72,11 +72,22 @@ namespace Tienda3D
                 desconectar();
             }
         }
+        public string fecha_inicio;
+        public string fecha_cierre;
+
+
         private void Form2_Load(object sender, EventArgs e)
         {
+            fecha_inicio = Convert.ToString(DateTime.Now.ToString("U")); //anota la fecha de entrada del usuario
+            fecha_cierre = Convert.ToString(DateTime.Now.ToString("U"));
+
             //conectar();
             lblID.Text = string.Format("{0}", nombreusuario);
             ConsultarPuesto();
+            if (lblRol.Text=="Super Administrador")
+            {
+
+            }
             if (lblRol.Text == "Vendedor")
             {
                 btnCompras.Visible = false;
@@ -99,15 +110,22 @@ namespace Tienda3D
                 btnCompraVenta.Visible = false;
                 btnCompraVenta2.Visible = true;
                 btnCorteCaja.Visible = false;
-                btnCorteCaja2.Visible = true;
+                btnCorteCaja2.Visible = false; 
                 btnProductos.Visible = false;
                 btnProductos2.Visible = true;
                 picProductos.Visible = false;
-                picCorteCaja.Visible = false;
+                picMovimientos.Visible = false;
                 picProcesos.Visible = false;
                 picProductos2.Visible = true;
-                picCorteCaja2.Visible = true;
+                picCorteCaja2.Visible = false;
                 picProcesos2.Visible = true;
+                picConsultas.Visible = false;
+            }
+            if (lblRol.Text == "Administrador")
+            {
+                btnMovimientos.Visible = false;
+                picMovimientos.Visible = false;
+                btnConsultas.Visible = false;
                 picConsultas.Visible = false;
             }
         }
@@ -161,9 +179,29 @@ namespace Tienda3D
 
         private void picExit_Click(object sender, EventArgs e)
         {
-            Form1 x = new Form1();
-            x.Show();
-            this.Hide();
+            try
+            {
+                conectar();
+                cmd = new MySqlCommand("ADDLOG_2", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                MySqlParameter _fecha_cierre = new MySqlParameter("_fecha_cierre", MySqlDbType.DateTime);
+                _fecha_cierre.Value = Convert.ToDateTime(lblfecha.Text);
+                cmd.Parameters.Add(_fecha_cierre);
+                cmd.ExecuteNonQuery();
+                Form1 x = new Form1();
+                x.Show();
+                this.Hide();
+                MessageBox.Show("¡Hasta luego! Usuario: " + lblID.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                desconectar();
+            }
         }
 
         private void btnEmpleados_Click(object sender, EventArgs e)
@@ -394,6 +432,7 @@ namespace Tienda3D
         {
             lblhora.Text = DateTime.Now.ToString("hh:mm:ss");
             lblfecha.Text = DateTime.Now.ToLongDateString();
+            lblFechaCierre.Text = DateTime.Now.ToShortDateString();
         }
 
         private void picMini_Click(object sender, EventArgs e)
@@ -570,6 +609,8 @@ namespace Tienda3D
                 {
                     Movimientos x = new Movimientos();
                     x.nombreusuario = lblID.Text;
+                    x.fecha_inicio = fecha_inicio; //guarda la fecha de inicio y la pasa al otro formulario de corte de caja
+                    x.fecha_cierre = fecha_cierre; //guarda la fecha de cierre y la pasa al otro formulario de corte de caja
                     this.Hide();
                     x.Show();
                 }
@@ -582,6 +623,11 @@ namespace Tienda3D
             {
                 desconectar();
             }
+        }
+
+        private void lblfecha_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

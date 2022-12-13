@@ -32,7 +32,8 @@ namespace Tienda3D
         {
             conn.Close();
         }
-        public Procesos()
+
+        public Procesos() //insercion de campos en la tabla
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
@@ -104,12 +105,45 @@ namespace Tienda3D
             }
         }
 
+        public void calculamonto()
+        {
+            double monto = 0;
+            try
+            {
+                if (dataTerminar.Rows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in dataTerminar.Rows)
+                    {
+                        monto += Convert.ToDouble(row.Cells["Monto"].Value);
+                        factura_tot += Convert.ToDouble(row.Cells["Monto"].Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            txtMonto.Text = monto.ToString("0");
+        }
+
+
         DataTable dt = new DataTable();
         MySqlDataAdapter da = new MySqlDataAdapter();
         MySqlConnection conexion = new MySqlConnection("Server= localhost; Database= Tienda3D; user = root; password= root; ");
 
+
+        public string fecha_inicio;
+        public string fecha_cierre;
+        public int venta;
+        public double factura_tot;
+
         private void Procesos_Load(object sender, EventArgs e)
         {
+            fecha_inicio = Convert.ToString(DateTime.Now.ToString("D")); //anota la fecha de entrada del usuario
+            lblfecha.Text = fecha_inicio.ToString(); // la toma y la convierte en cadena
+            fecha_cierre = Convert.ToString(DateTime.Now.ToString("D"));
+            lblfecha.Text = fecha_cierre.ToString();
+
             //invoca el ID del usuario
             lblID.Text = string.Format("{0}", nombreusuario);
             ConsultarPuesto(); // Consulta el puesto y pone que puesto tiene el usuario
@@ -246,7 +280,7 @@ namespace Tienda3D
             txtExistenciaProducto.Clear();
             maskedFecha.Clear();
             txtFolioCompra.Clear();
-            txtMonto.Clear();
+            txtMonto.Text = "0";
             txtNombreCliente.Clear();
             txtNombreProducto.Clear();
             txtPrecioVentaProducto.Clear();
@@ -312,6 +346,7 @@ namespace Tienda3D
             dataProductos.Visible = false;
         }
 
+        
         private void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
             //Agregamos los datos que pusimos en los textbox en el datagrid
@@ -383,12 +418,15 @@ namespace Tienda3D
                     txtExistenciaProducto.Clear();
                     maskedFecha.Clear();
                     txtFolioCompra.Clear();
-                    txtMonto.Clear();
+                    txtMonto.Text = "0";
                     txtNombreCliente.Clear();
                     txtNombreProducto.Clear();
                     txtPrecioVentaProducto.Clear();
                     NumericCantidadLlevar.Value = 0;
                     maskedFechaVenta.Clear();
+
+                    venta += 1;
+                    factura_tot += Convert.ToDouble(txtMonto.Text.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -401,26 +439,6 @@ namespace Tienda3D
             }
         }
 
-        private void calculamonto()
-        {
-            double monto = 0;
-            try
-            {
-                if (dataTerminar.Rows.Count > 0)
-                {
-                    foreach(DataGridViewRow row in dataTerminar.Rows)
-                    {
-                        monto += Convert.ToDouble(row.Cells["Monto"].Value);
-                        //txtMonto.Text = dataTerminar.SelectedCells[9].Value.ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            txtMonto.Text = monto.ToString("0");
-        }
 
         private void validarcampo()
         {
@@ -461,7 +479,7 @@ namespace Tienda3D
                 conectar();
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM socio Where (" + comboBusqueda.Text + ") LIKE ('" + txtbusqueda.Text + "%')";
+                cmd.CommandText = "SELECT * FROM producto Where (" + comboBusqueda.Text + ") LIKE ('" + txtbusqueda.Text + "%')";
                 cmd.ExecuteNonQuery();
                 dt = new DataTable();
                 da = new MySqlDataAdapter(cmd);
@@ -484,6 +502,38 @@ namespace Tienda3D
                 MessageBox.Show("Solo letras y números", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
                 return;
+            }
+        }
+
+        private void btnCorteCaja_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conectar();
+                //Creo una consulta para saber si existe
+                string query = "Select ID_User From Usuarios Where ID_User = ('" + lblID.Text + "'); ";
+                cmd = new MySqlCommand(query, conn);
+                cmd.CommandType = CommandType.Text;
+                reader = cmd.ExecuteReader();
+                if (reader.Read())// Si existe el usuario
+                {
+                    Corte_caja x = new Corte_caja();
+                    x.nombreusuario = lblID.Text;
+                    x.fecha_inicio = fecha_inicio; //guarda la fecha de inicio y la pasa al otro formulario de corte de caja
+                    x.fecha_cierre = fecha_cierre; //guarda la fecha de cierre y la pasa al otro formulario de corte de caja
+                    x.venta=venta; //Se manda la cantidad de ventas en el formulario de corte de caja
+                    x.factura_tot=factura_tot;//Pasa el total del monto
+                    x.Show();
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                desconectar();
             }
         }
     }

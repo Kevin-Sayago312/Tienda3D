@@ -38,11 +38,22 @@ namespace Tienda3D
         {
             conn.Close();
         }
+
+        DataTable dt = new DataTable();
+        MySqlDataAdapter da = new MySqlDataAdapter();
         public Movimientos()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             this.Padding = new Padding(borderSize);
+
+            //Mostrar tabla
+            dt = new DataTable();
+            dt.Columns.Add("ID del usuario");
+            dt.Columns.Add("Tipo de usuario");
+            dt.Columns.Add("Fecha que inicio");
+            dt.Columns.Add("Fecha que cerro sesion");
+            dataMostrar.DataSource = dt; // Invocamos el datagrid donde vamos a mostrar esos datos que queremos
         }
 
         MySqlConnection conexion = new MySqlConnection("Server= localhost; Database= Tienda3D; user = root; password= root; ");
@@ -76,11 +87,21 @@ namespace Tienda3D
             }
         }
 
+        public string fecha_inicio;
+        public string fecha_cierre;
+
         private void Movimientos_Load(object sender, EventArgs e)
         {
             //invoca el ID del usuario
             lblID.Text = string.Format("{0}", nombreusuario);
             ConsultarPuesto(); // Consulta el puesto y pone que puesto tiene el usuario
+
+            /*DataRow row = dt.NewRow();
+            row["ID del usuario"] = nombreusuario.ToString();
+            row["Tipo de usuario"] = lblRol.Text.ToString();
+            row["Fecha que inicio"] = fecha_inicio.ToString();
+            row["Fecha que cerro sesion"] = fecha_cierre.ToString();
+            dt.Rows.Add(row);*/
         }
 
         private void Movimientos_MouseDown(object sender, MouseEventArgs e)

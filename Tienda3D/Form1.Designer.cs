@@ -29,6 +29,7 @@ namespace Tienda3D
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +49,8 @@ namespace Tienda3D
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.comboTipo = new System.Windows.Forms.ComboBox();
+            this.lblfecha = new System.Windows.Forms.Label();
+            this.TimeFecha = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -152,6 +155,7 @@ namespace Tienda3D
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel2.BackColor = System.Drawing.Color.SlateGray;
+            this.panel2.Controls.Add(this.lblfecha);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Controls.Add(this.pictureBox3);
@@ -270,6 +274,22 @@ namespace Tienda3D
             this.comboTipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             this.comboTipo.Leave += new System.EventHandler(this.comboBox1_Leave);
             // 
+            // lblfecha
+            // 
+            this.lblfecha.AutoSize = true;
+            this.lblfecha.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfecha.Location = new System.Drawing.Point(367, 6);
+            this.lblfecha.Name = "lblfecha";
+            this.lblfecha.Size = new System.Drawing.Size(69, 23);
+            this.lblfecha.TabIndex = 117;
+            this.lblfecha.Text = "label3";
+            this.lblfecha.Visible = false;
+            // 
+            // TimeFecha
+            // 
+            this.TimeFecha.Enabled = true;
+            this.TimeFecha.Tick += new System.EventHandler(this.TimeFecha_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,6 +348,8 @@ namespace Tienda3D
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboTipo;
+        private System.Windows.Forms.Label lblfecha;
+        private System.Windows.Forms.Timer TimeFecha;
     }
 }
 

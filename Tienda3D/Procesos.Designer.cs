@@ -81,6 +81,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
+            this.lblfecha = new System.Windows.Forms.Label();
+            this.btnCorteCaja = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMini)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -103,6 +105,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.SlateGray;
             this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.lblfecha);
             this.panel2.Controls.Add(this.picMini);
             this.panel2.Controls.Add(this.pictureBox9);
             this.panel2.Location = new System.Drawing.Point(1, 0);
@@ -160,7 +163,7 @@
             this.btnRegresarMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
             this.btnRegresarMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegresarMenu.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegresarMenu.Location = new System.Drawing.Point(34, 477);
+            this.btnRegresarMenu.Location = new System.Drawing.Point(34, 530);
             this.btnRegresarMenu.Name = "btnRegresarMenu";
             this.btnRegresarMenu.Size = new System.Drawing.Size(276, 47);
             this.btnRegresarMenu.TabIndex = 72;
@@ -694,12 +697,36 @@
             this.txtMonto.TabIndex = 95;
             this.txtMonto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMonto_KeyPress);
             // 
+            // lblfecha
+            // 
+            this.lblfecha.AutoSize = true;
+            this.lblfecha.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfecha.Location = new System.Drawing.Point(410, 9);
+            this.lblfecha.Name = "lblfecha";
+            this.lblfecha.Size = new System.Drawing.Size(69, 23);
+            this.lblfecha.TabIndex = 116;
+            this.lblfecha.Text = "label3";
+            // 
+            // btnCorteCaja
+            // 
+            this.btnCorteCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
+            this.btnCorteCaja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCorteCaja.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCorteCaja.Location = new System.Drawing.Point(34, 477);
+            this.btnCorteCaja.Name = "btnCorteCaja";
+            this.btnCorteCaja.Size = new System.Drawing.Size(276, 47);
+            this.btnCorteCaja.TabIndex = 117;
+            this.btnCorteCaja.Text = "Corte de caja";
+            this.btnCorteCaja.UseVisualStyleBackColor = false;
+            this.btnCorteCaja.Click += new System.EventHandler(this.btnCorteCaja_Click);
+            // 
             // Procesos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1332, 669);
+            this.Controls.Add(this.btnCorteCaja);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.maskedFechaVenta);
             this.Controls.Add(this.label15);
@@ -810,5 +837,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtMonto;
+        private System.Windows.Forms.Label lblfecha;
+        private System.Windows.Forms.Button btnCorteCaja;
     }
 }

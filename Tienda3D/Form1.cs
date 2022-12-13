@@ -45,9 +45,11 @@ namespace Tienda3D
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             btnIniciarSesion.Enabled = false;
+
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -143,6 +145,30 @@ namespace Tienda3D
             {
                 desconectar();
             }
+
+            try
+            {
+                conectar();
+                cmd = new MySqlCommand("ADDLOG_1", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                MySqlParameter _id_usuario = new MySqlParameter("_id_usuario", MySqlDbType.VarChar, 5);
+                _id_usuario.Value = txtUsuario.Text;
+                cmd.Parameters.Add(_id_usuario);
+                MySqlParameter _fecha_inicio = new MySqlParameter("_fecha_inicio", MySqlDbType.DateTime);
+                _fecha_inicio.Value = Convert.ToDateTime(lblfecha.Text);
+                cmd.Parameters.Add(_fecha_inicio);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("¡Bienvenido! Usuario: " + txtUsuario.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                desconectar();
+            }
+
         }
 
         private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
@@ -278,6 +304,11 @@ namespace Tienda3D
         private void comboTipo_TextChanged(object sender, EventArgs e)
         {
             validarcampo();
+        }
+
+        private void TimeFecha_Tick(object sender, EventArgs e)
+        {
+            lblfecha.Text = DateTime.Now.ToShortDateString();
         }
     }
 }

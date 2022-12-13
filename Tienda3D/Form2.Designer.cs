@@ -36,6 +36,7 @@ namespace Tienda3D
             this.picEmpleados = new System.Windows.Forms.PictureBox();
             this.picUsuarios = new System.Windows.Forms.PictureBox();
             this.picProveedores = new System.Windows.Forms.PictureBox();
+            this.btnCorteCaja = new System.Windows.Forms.Button();
             this.picProductos = new System.Windows.Forms.PictureBox();
             this.picSocios = new System.Windows.Forms.PictureBox();
             this.picCompras = new System.Windows.Forms.PictureBox();
@@ -66,16 +67,16 @@ namespace Tienda3D
             this.horaFecha = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
             this.picProcesos = new System.Windows.Forms.PictureBox();
-            this.picCorteCaja = new System.Windows.Forms.PictureBox();
+            this.picMovimientos = new System.Windows.Forms.PictureBox();
             this.picConsultas = new System.Windows.Forms.PictureBox();
             this.btnMovimientos = new System.Windows.Forms.Button();
-            this.btnCorteCaja = new System.Windows.Forms.Button();
             this.btnCompraVenta = new System.Windows.Forms.Button();
             this.btnConsultas = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.lblRol = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.lblFechaCierre = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCorteCaja2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEmpleados)).BeginInit();
@@ -95,7 +96,7 @@ namespace Tienda3D
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picProcesos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCorteCaja)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMovimientos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picConsultas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,6 +108,7 @@ namespace Tienda3D
             this.panel1.Controls.Add(this.picEmpleados);
             this.panel1.Controls.Add(this.picUsuarios);
             this.panel1.Controls.Add(this.picProveedores);
+            this.panel1.Controls.Add(this.btnCorteCaja);
             this.panel1.Controls.Add(this.picProductos);
             this.panel1.Controls.Add(this.picSocios);
             this.panel1.Controls.Add(this.picCompras);
@@ -178,6 +180,21 @@ namespace Tienda3D
             this.picProveedores.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picProveedores.TabIndex = 2;
             this.picProveedores.TabStop = false;
+            // 
+            // btnCorteCaja
+            // 
+            this.btnCorteCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
+            this.btnCorteCaja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCorteCaja.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCorteCaja.Location = new System.Drawing.Point(0, 39);
+            this.btnCorteCaja.Name = "btnCorteCaja";
+            this.btnCorteCaja.Size = new System.Drawing.Size(29, 36);
+            this.btnCorteCaja.TabIndex = 11;
+            this.btnCorteCaja.Text = "Corte de caja";
+            this.btnCorteCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCorteCaja.UseVisualStyleBackColor = false;
+            this.btnCorteCaja.Visible = false;
+            this.btnCorteCaja.Click += new System.EventHandler(this.btnCorteCaja_Click);
             // 
             // picProductos
             // 
@@ -436,6 +453,7 @@ namespace Tienda3D
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SlateGray;
+            this.panel2.Controls.Add(this.lblFechaCierre);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.picExit);
             this.panel2.Controls.Add(this.picMini);
@@ -495,7 +513,7 @@ namespace Tienda3D
             this.lblhora.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblhora.Location = new System.Drawing.Point(262, 91);
             this.lblhora.Name = "lblhora";
-            this.lblhora.Size = new System.Drawing.Size(131, 44);
+            this.lblhora.Size = new System.Drawing.Size(130, 44);
             this.lblhora.TabIndex = 2;
             this.lblhora.Text = "label2";
             this.lblhora.Click += new System.EventHandler(this.lblhora_Click);
@@ -506,9 +524,10 @@ namespace Tienda3D
             this.lblfecha.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblfecha.Location = new System.Drawing.Point(262, 148);
             this.lblfecha.Name = "lblfecha";
-            this.lblfecha.Size = new System.Drawing.Size(131, 44);
+            this.lblfecha.Size = new System.Drawing.Size(130, 44);
             this.lblfecha.TabIndex = 3;
             this.lblfecha.Text = "label3";
+            this.lblfecha.Click += new System.EventHandler(this.lblfecha_Click);
             // 
             // pictureBox1
             // 
@@ -530,10 +549,9 @@ namespace Tienda3D
             // 
             this.panel3.BackColor = System.Drawing.Color.Teal;
             this.panel3.Controls.Add(this.picProcesos);
-            this.panel3.Controls.Add(this.picCorteCaja);
+            this.panel3.Controls.Add(this.picMovimientos);
             this.panel3.Controls.Add(this.picConsultas);
             this.panel3.Controls.Add(this.btnMovimientos);
-            this.panel3.Controls.Add(this.btnCorteCaja);
             this.panel3.Controls.Add(this.btnCompraVenta);
             this.panel3.Controls.Add(this.btnConsultas);
             this.panel3.Location = new System.Drawing.Point(255, 248);
@@ -553,17 +571,17 @@ namespace Tienda3D
             this.picProcesos.TabIndex = 24;
             this.picProcesos.TabStop = false;
             // 
-            // picCorteCaja
+            // picMovimientos
             // 
-            this.picCorteCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
-            this.picCorteCaja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picCorteCaja.Image = ((System.Drawing.Image)(resources.GetObject("picCorteCaja.Image")));
-            this.picCorteCaja.Location = new System.Drawing.Point(4, 102);
-            this.picCorteCaja.Name = "picCorteCaja";
-            this.picCorteCaja.Size = new System.Drawing.Size(53, 36);
-            this.picCorteCaja.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCorteCaja.TabIndex = 23;
-            this.picCorteCaja.TabStop = false;
+            this.picMovimientos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
+            this.picMovimientos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picMovimientos.Image = ((System.Drawing.Image)(resources.GetObject("picMovimientos.Image")));
+            this.picMovimientos.Location = new System.Drawing.Point(5, 101);
+            this.picMovimientos.Name = "picMovimientos";
+            this.picMovimientos.Size = new System.Drawing.Size(53, 36);
+            this.picMovimientos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picMovimientos.TabIndex = 23;
+            this.picMovimientos.TabStop = false;
             // 
             // picConsultas
             // 
@@ -582,7 +600,7 @@ namespace Tienda3D
             this.btnMovimientos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
             this.btnMovimientos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMovimientos.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMovimientos.Location = new System.Drawing.Point(1, 142);
+            this.btnMovimientos.Location = new System.Drawing.Point(1, 101);
             this.btnMovimientos.Name = "btnMovimientos";
             this.btnMovimientos.Size = new System.Drawing.Size(257, 36);
             this.btnMovimientos.TabIndex = 11;
@@ -590,20 +608,6 @@ namespace Tienda3D
             this.btnMovimientos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMovimientos.UseVisualStyleBackColor = false;
             this.btnMovimientos.Click += new System.EventHandler(this.btnMovimientos_Click);
-            // 
-            // btnCorteCaja
-            // 
-            this.btnCorteCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(105)))), ((int)(((byte)(205)))));
-            this.btnCorteCaja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCorteCaja.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCorteCaja.Location = new System.Drawing.Point(1, 102);
-            this.btnCorteCaja.Name = "btnCorteCaja";
-            this.btnCorteCaja.Size = new System.Drawing.Size(257, 36);
-            this.btnCorteCaja.TabIndex = 11;
-            this.btnCorteCaja.Text = "Corte de caja";
-            this.btnCorteCaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCorteCaja.UseVisualStyleBackColor = false;
-            this.btnCorteCaja.Click += new System.EventHandler(this.btnCorteCaja_Click);
             // 
             // btnCompraVenta
             // 
@@ -639,7 +643,7 @@ namespace Tienda3D
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(427, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 32);
+            this.label2.Size = new System.Drawing.Size(49, 32);
             this.label2.TabIndex = 7;
             this.label2.Text = "ID:";
             // 
@@ -669,9 +673,20 @@ namespace Tienda3D
             this.label6.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(552, 43);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 32);
+            this.label6.Size = new System.Drawing.Size(61, 32);
             this.label6.TabIndex = 9;
             this.label6.Text = "Rol:";
+            // 
+            // lblFechaCierre
+            // 
+            this.lblFechaCierre.AutoSize = true;
+            this.lblFechaCierre.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaCierre.Location = new System.Drawing.Point(421, 8);
+            this.lblFechaCierre.Name = "lblFechaCierre";
+            this.lblFechaCierre.Size = new System.Drawing.Size(171, 23);
+            this.lblFechaCierre.TabIndex = 118;
+            this.lblFechaCierre.Text = "labelFechaCierre";
+            this.lblFechaCierre.Visible = false;
             // 
             // Form2
             // 
@@ -717,7 +732,7 @@ namespace Tienda3D
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picProcesos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCorteCaja)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMovimientos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picConsultas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -766,10 +781,11 @@ namespace Tienda3D
         private System.Windows.Forms.Button btnCompraVenta2;
         private System.Windows.Forms.Button btnCorteCaja2;
         private System.Windows.Forms.PictureBox picProcesos;
-        private System.Windows.Forms.PictureBox picCorteCaja;
+        private System.Windows.Forms.PictureBox picMovimientos;
         private System.Windows.Forms.PictureBox picConsultas;
         private System.Windows.Forms.PictureBox picCorteCaja2;
         private System.Windows.Forms.PictureBox picProcesos2;
         private System.Windows.Forms.PictureBox picProductos2;
+        private System.Windows.Forms.Label lblFechaCierre;
     }
 }

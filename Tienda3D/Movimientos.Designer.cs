@@ -39,9 +39,11 @@ namespace Tienda3D
             this.picMini = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.btnRegresarMenu = new System.Windows.Forms.Button();
+            this.dataMostrar = new System.Windows.Forms.DataGridView();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMini)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataMostrar)).BeginInit();
             this.SuspendLayout();
             // 
             // lblRol
@@ -101,9 +103,9 @@ namespace Tienda3D
             this.label6.Font = new System.Drawing.Font("Century Schoolbook", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(81, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(179, 23);
+            this.label6.Size = new System.Drawing.Size(167, 23);
             this.label6.TabIndex = 4;
-            this.label6.Text = "CORTE DE CAJA";
+            this.label6.Text = "MOVIMIENTOS";
             // 
             // picMini
             // 
@@ -139,12 +141,23 @@ namespace Tienda3D
             this.btnRegresarMenu.UseVisualStyleBackColor = false;
             this.btnRegresarMenu.Click += new System.EventHandler(this.btnRegresarMenu_Click);
             // 
+            // dataMostrar
+            // 
+            this.dataMostrar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataMostrar.Location = new System.Drawing.Point(21, 139);
+            this.dataMostrar.Name = "dataMostrar";
+            this.dataMostrar.ReadOnly = true;
+            this.dataMostrar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataMostrar.Size = new System.Drawing.Size(709, 299);
+            this.dataMostrar.TabIndex = 87;
+            // 
             // Movimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(742, 450);
+            this.Controls.Add(this.dataMostrar);
             this.Controls.Add(this.btnRegresarMenu);
             this.Controls.Add(this.lblRol);
             this.Controls.Add(this.label4);
@@ -162,6 +175,7 @@ namespace Tienda3D
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMini)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataMostrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +192,6 @@ namespace Tienda3D
         private System.Windows.Forms.PictureBox picMini;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.Button btnRegresarMenu;
+        private System.Windows.Forms.DataGridView dataMostrar;
     }
 }
